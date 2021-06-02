@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />
+
+	<!-- localhost:8080/hello/static/*** 로 요청을 하면
+		 webapp/static 폴더에 있는 파일을 찾아라
+		 그리고 바로 response 하라
+		 이 요청은 Controller로 전달할 필요가 없다
+	-->
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/static/**" location="/static/" />
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<!-- Spring 컨테이너가 클래스를 객체로 생성하여 보관하는데
+		 그때 생성된 객체들을 Web Project 에서는 보통 bean 이라고 부른다
+		 
+		 InternalResourceViewResolver 클래스를 사용하고 싶으니
+		 bean으로 만들어서 Container에 보관해 달라
+		 
+		 이 클래스의 어떤 method을 호출하려고 했더니
+		 클래스 멤버변수(private) 중에
+		 prefix 라는 변수값과 suffix라는 변수값이 필요하더라
+		 
+		 그래서 미리 변수값을 setter해 달라고 지정 prroperty 지정한다
+		  -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+	
+	<context:component-scan base-package="com.callor.hello.controller" />
+	<context:component-scan base-package="com.callor.hello.service" />
+	
+	
+	
+</beans:beans>
