@@ -1,0 +1,78 @@
+@charset "UTF-8";
+
+section#main_sec {
+	width: 100%;
+	margin: 5px auto;
+	border: 1px solid #999;
+	display: flex;
+}
+
+section#main_sec article {
+	flex: 1;
+	border: 1px solid gray;
+	margin: 6px 3px;
+	padding: 5px;
+}
+
+section#main_sec article li {
+	margin: 0 50px;
+	padding: 0 10px;
+}
+
+section#ad_sec {
+	width: 100%;
+	border: 1px solid #999;
+	display: flex;
+}
+
+section#ad_sec article {
+	height: 100px;
+	margin: 5px 3px;
+	flex: 1;
+	background-size: 100% 100%;
+	border-radius: 5px;
+}
+
+/*
+		어떤 요소의 순서대로 속성을 지정할때
+		nth-child(순서), nth-of-type(순서)
+		다음과 같이 tag가 구성되어 있을때
+			<div>
+			 <p>1
+			 <p>2
+			 <div>3
+			 <p>4
+			<div>
+		
+		nth-child는 무조건 포함된 tag에 모두 일련번호를 부여한다	
+		div p:nth-child(4) : <p>4 tag에 대하여
+		
+		nth-of-type은 포함된 tag중에 지정한 tag만 일련번호를 부여한다
+		div p:nth-child(3) : <p>4 tag에 대하여
+	*/
+section#ad_sec article:nth-of-type(1) {
+	background: url("${rootPath}/static/images/ad01.jpg");
+}
+
+section#ad_sec article:nth-of-type(2) {
+	background: url("${rootPath}/static/images/ad02.jpg");
+}
+
+section#ad_sec article:nth-of-type(3) {
+	background: url("${rootPath}/static/images/ad03.jpg");
+}
+
+section#ad_sec article:nth-of-type(4) {
+	background: url("${rootPath}/static/images/ad04.jpg");
+}
+
+section#ad_sec article:nth-of-type(5) {
+	background: url("${rootPath}/static/images/ad05.jpg");
+}
+
+/*
+	home.jsp의 
+	중간 부분 이미지를 표현ㄴ하는 부분의 CSS는 
+	rootPath의 문제로 여기에 둘 수 없어서
+	include_header.jspf 파일에 옮겼다
+*/
