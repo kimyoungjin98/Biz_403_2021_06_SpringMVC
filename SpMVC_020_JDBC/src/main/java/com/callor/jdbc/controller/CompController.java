@@ -25,7 +25,13 @@ public class CompController {
 		this.compService = compService;
 		
 	}
-
+	
+	@RequestMapping(value={"/",""}, method=RequestMethod.GET)
+	public String list() {
+		
+		return "comp/list";
+	}
+	
 	@RequestMapping(value="/insert", method=RequestMethod.GET)
 	public String insert() {
 		

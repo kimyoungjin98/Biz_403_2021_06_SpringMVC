@@ -5,57 +5,8 @@
 <!DOCTYPE html>
 <html>
 <%@ include file="/WEB-INF/views/include/include_head.jspf"%>
-<style>
-form {
-	width: 80%;
-	margin: 15px auto;
-}
-
-fieldset {
-	border: 1px solid green;
-	border-radius: 15px;
-}
-
-legend {
-	text-align: center;
-	padding: 10px 20px;
-	background-color: #aaa;
-}
-
-form div {
-	width: 80%;
-	margin: 5px;
-}
-
-form label {
-	display: inline-block;
-	width: 20%;
-	text-align: right;
-	margin: 8px 5px;
-	padding: 8px;
-	color: rgba(255, 0, 0, 0.5);
-	font-weight: bold;
-}
-
-form input {
-	width: 70%;
-	margin: 8px 5px;
-	padding: 8px;
-	border-radius: 25px;
-	outline: 0;
-	border-color: rgba(0, 255, 255, 0.5);
-}
-
-form input:focus {
-	border-color: #999;
-}
-
-form input:hover {
-	background-color: #ddd;
-}
-</style>
 <body>
-	<%@ include file="/WEB-INF/views/include/include_header.jspf"%>
+<%@ include file="/WEB-INF/views/include/include_header.jspf"%>
 
 	<form method="POST">
 		<fieldset>
@@ -91,9 +42,9 @@ form input:hover {
 		</fieldset>
 
 		<div class="btn_box">
-			<button type="button" class="btn_book_insert">도서등록</button>
-			<button type="reset" class="btn_book_reset">새로작성</button>
-			<button type="button" class="btn_book_list">리스트로</button>
+			<button type="button" class="btn_insert">도서등록</button>
+			<button type="reset" class="btn_reset">새로작성</button>
+			<button type="button" class="btn_list">리스트로</button>
 		</div>
 	</form>
 

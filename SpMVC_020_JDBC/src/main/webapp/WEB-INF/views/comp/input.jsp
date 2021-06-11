@@ -1,27 +1,80 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:set var="rootPath" value="${pageContext.request.contextPath}"/>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="rootPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>나의 홈페이지</title>
-</head>
+<%@ include file="/WEB-INF/views/include/include_head.jspf"%>
+<style>
+form {
+	width: 80%;
+	margin: 80px auto;
+}
+
+form div {
+	width: 40%;
+	margin: 20px;
+}
+
+form label {
+	display: inline-block;
+    margin: 5px;
+    text-align: start;
+    width: 30%;
+    padding: 8px;
+    color: rgba(0,0,0,0.6);
+}
+
+form input {
+	outline: none;
+    border: 1px solid rgba(0,0,0,0.2);
+    margin: 8px 5px;
+    padding: 7px;
+    width: 60%;
+}
+
+div.input{
+	border:1px solid rgba(0,0,0,0.2);
+	border-top:2px solid rgba(0,0,0,0.8);
+}
+
+form button{
+	padding: 10px 50px;
+    outline: 0;
+    border: 0;
+    background-color: rgba(0,0,0,0.2);
+    display: inline-block;
+    color: white;
+}
+</style>
 <body>
-	<h1>출판사 정보 등록</h1>
+	<%@ include file="/WEB-INF/views/include/include_header.jspf"%>
 	<form method="post">
-	<div><label>출판사명</label><input name="cp_title"></div>
-	<div><label>대표자명</label><input name="cp_ceo"></div>
-	<div><label>전화번호</label><input name="cp_tel"></div>
-	<div><label>주소</label><input name="cp_addr"></div>
-	<div><button>저장</button></div>
+
+		<div class="input">
+			<div>
+				<label>출판사명</label><input name="cp_title">
+			</div>
+			<div>
+				<label>대표자명</label><input name="cp_ceo">
+			</div>
+			<div>
+				<label>전화번호</label><input name="cp_tel">
+			</div>
+			<div>
+				<label>주소</label><input name="cp_addr">
+			</div>
+			<div class="btn_box">
+				<button type="button" class="btn_save">저장</button>
+				<button type="reset" class="btn_reset">다시작성</button>
+				<button type="button" class="btn_list">리스트로</button>
+			</div>
+		</div>
 	</form>
-	<div>
-	<lable>삭제할 코드</lable><input name="cpcode" id="cpcode">
-	<button class="btn_delete">삭제</button>
-	</div>
-	<script>
+	
+	<%@ include file="/WEB-INF/views/include/include_footer.jspf"%>
+</body>
+<script>
 	// const : 상수를 선언하는 키워드
 	//		코드가 진행되는 동안 값이 변경되면 안되는 것
 	const doc = document;
@@ -39,5 +92,4 @@
 		}
 	})
 	</script>
-</body>
 </html>
