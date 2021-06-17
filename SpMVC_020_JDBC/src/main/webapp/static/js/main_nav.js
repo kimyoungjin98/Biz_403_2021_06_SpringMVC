@@ -20,8 +20,12 @@ document.addEventListener("DOMContentLoaded", () => {
         urlPath += "/author";
       } else if (menuText === "로그인") {
         urlPath += "/member/login";
+      } else if (menuText === "로그아웃") {
+        urlPath += "/member/logout";
       } else if (menuText === "회원가입") {
         urlPath += "/member/join";
+      } else if (e.target.id === "mypage") {
+        urlPath += "/member/mypage";
       }
       location.href = urlPath;
     }

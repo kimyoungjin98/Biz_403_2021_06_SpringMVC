@@ -18,60 +18,61 @@ form div {
 
 form label {
 	display: inline-block;
-    margin: 5px;
-    text-align: start;
-    width: 30%;
-    padding: 8px;
-    color: rgba(0,0,0,0.6);
+	margin: 5px;
+	text-align: start;
+	width: 30%;
+	padding: 8px;
+	color: rgba(0, 0, 0, 0.6);
 }
 
 form input {
 	outline: none;
-    border: 1px solid rgba(0,0,0,0.2);
-    margin: 8px 5px;
-    padding: 7px;
-    width: 60%;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	margin: 8px 5px;
+	padding: 7px;
+	width: 60%;
 }
 
-div.input{
-	border:1px solid rgba(0,0,0,0.2);
-	border-top:2px solid rgba(0,0,0,0.8);
+div.input {
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	border-top: 2px solid rgba(0, 0, 0, 0.8);
 }
 
-form button{
+form button {
 	padding: 10px 50px;
-    outline: 0;
-    border: 0;
-    background-color: rgba(0,0,0,0.2);
-    display: inline-block;
-    color: white;
+	outline: 0;
+	border: 0;
+	background-color: rgba(0, 0, 0, 0.2);
+	display: inline-block;
+	color: white;
 }
 </style>
 <body>
 	<%@ include file="/WEB-INF/views/include/include_header.jspf"%>
-	<form method="post">
+	<section class="main_sec">
+		<form method="post">
 
-		<div class="input">
-			<div>
-				<label>출판사명</label><input name="cp_title">
+			<div class="input">
+				<div>
+					<label>출판사명</label><input name="cp_title">
+				</div>
+				<div>
+					<label>대표자명</label><input name="cp_ceo">
+				</div>
+				<div>
+					<label>전화번호</label><input name="cp_tel">
+				</div>
+				<div>
+					<label>주소</label><input name="cp_addr">
+				</div>
+				<div class="btn_box">
+					<button type="button" class="btn_save">저장</button>
+					<button type="reset" class="btn_reset">다시작성</button>
+					<button type="button" class="btn_list">리스트로</button>
+				</div>
 			</div>
-			<div>
-				<label>대표자명</label><input name="cp_ceo">
-			</div>
-			<div>
-				<label>전화번호</label><input name="cp_tel">
-			</div>
-			<div>
-				<label>주소</label><input name="cp_addr">
-			</div>
-			<div class="btn_box">
-				<button type="button" class="btn_save">저장</button>
-				<button type="reset" class="btn_reset">다시작성</button>
-				<button type="button" class="btn_list">리스트로</button>
-			</div>
-		</div>
-	</form>
-	
+		</form>
+	</section>
 	<%@ include file="/WEB-INF/views/include/include_footer.jspf"%>
 </body>
 <script>
