@@ -52,14 +52,13 @@ form{
 	<div id="input">
 		<div id="inputbox">
 		<label>학번 ${ST.st_num}</label> 
-			<form method="post">
+			<form method="post" onsubmit="return check()" name="frm">
 
-				<label>이름<input name="name"
-					value="${ST.st_name}"></label> <label>전공<input name="dept"
-					value="${ST.st_dept}"></label> <label>학년<input name="grade"
-					value="${ST.st_grade}"></label> <label>전화번호<input
-					name="tel" value="${ST.st_tel}"></label> <label>주소<input
-					name="addr" value="${ST.st_addr}"></label>
+				<label>이름<input name="name" value="${ST.st_name}" maxlength="5"></label> 
+				<label>전공<input name="dept" value="${ST.st_dept}" maxlength="20"></label> 
+				<label>학년<input name="grade" value="${ST.st_grade}" maxlength="1"></label> 
+				<label>전화번호<input name="tel" value="${ST.st_tel}" maxlength="13"></label> 
+				<label>주소<input name="addr" value="${ST.st_addr}" maxlength="125"></label>
 		</div>
 		<div id="btn">
 			<button>전송</button>
@@ -67,4 +66,34 @@ form{
 		</form>
 	</div>
 </body>
+<script>
+function check(){
+	
+	if(frm.name.value == ""){
+		alert("이름을 입력하세요!!");
+		frm.name.focus;
+		return false;
+	}
+	if(frm.dept.value == ""){
+		alert("전공을 입력하세요!!");
+		frm.dept.focus;
+		return false;
+	} 
+	if(frm.grade.value == ""){
+		alert("학년을 입력하세요!!");
+		frm.grade.focus;
+		return false;
+	} 
+	if(frm.tel.value == ""){
+		alert("전화번호를 입력하세요!!");
+		frm.tel.focus;
+		return false;
+	} 
+	
+	
+		return true;
+
+}
+	
+</script>
 </html>

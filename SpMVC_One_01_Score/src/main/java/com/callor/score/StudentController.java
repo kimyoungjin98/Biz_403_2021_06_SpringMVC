@@ -116,11 +116,15 @@ public class StudentController {
 	
 	@RequestMapping(value="/delete", method=RequestMethod.GET)
 	public String delete(@RequestParam("num") String num,
+			 			@RequestParam(name="MSG" ,required = false) String msg,
 							Model model) {
 		
 		
 		int result = stService.delete(num);
 		if(result == 0) {
+			
+			model.addAttribute("MSG", "error");
+			
 			return "redirect:/student";
 		}
 

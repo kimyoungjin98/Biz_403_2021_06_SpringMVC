@@ -28,7 +28,10 @@ public class InfoController {
 	}
 	
 	@RequestMapping(value="/info", method=RequestMethod.GET)
-	public String info(@RequestParam("num") String num, Model model) {
+	public String info(@RequestParam("num") String num, 
+						Model model) {
+		
+		
 		
 		StudentVO stVO = stService.findById(num);
 		List<ScoreVO> scList = scService.findByNum(num);

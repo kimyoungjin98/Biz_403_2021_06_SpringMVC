@@ -9,26 +9,24 @@
 <title>학생정보</title>
 </head>
 <style>
-	div#info{
-	
+div#info {
 	margin-left: 400px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-	
-	}
-	
-	div#info button{
-		margin-left:6px;
-	}
-	
-	tbody#score tr{
-		cursor:pointer;
-	}
-	
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+
+div#info button {
+	margin-left: 6px;
+}
+
+tbody#score tr {
+	cursor: pointer;
+}
 </style>
 <body>
 	<%@ include file="/WEB-INF/views/include/nav.jsp"%>
+	<a>${MSG}</a>
 	<div id="info">
 		<div>
 			<table>
@@ -45,7 +43,7 @@
 				<tbody id="student">
 					<tr data-num="${ST.st_num}">
 						<td>${ST.st_num}</td>
-						<td>${ST.st_name}</td>
+						<td id="name">${ST.st_name}</td>
 						<td>${ST.st_dept}</td>
 						<td>${ST.st_grade}</td>
 					</tr>
@@ -101,13 +99,19 @@ document.querySelector("div#info").addEventListener("click", (e)=>{
 	
 	let para = window.location.search;
 	let id = e.target.id;
+	let name = document.getElementById("name").textContent;
 	
 	if(id === "update"){
 		location.href = "${rootPath}/student/update" + para;
 	} else if (id === "insert"){
 		location.href = "${rootPath}/score/insert" + para;	
 	} else if (id === "tDelete"){
-		location.href = "${rootPath}/student/delete" + para;	
+		if(!confirm(name + "학생의 데이터를 삭제하시겠습니까?")){
+			return false;
+		}
+		alert(name + "학생의 데이터를 삭제합니다")
+		location.href = "${rootPath}/student/delete" + para;
+				
 	}
 	
 });

@@ -23,6 +23,7 @@ button#insert{
 </style>
 <body>
 <%@ include file="/WEB-INF/views/include/nav.jsp" %>
+<a>${MSG}</a>
 <div id="stList">
 <table>
 	<thead>

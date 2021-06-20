@@ -43,11 +43,13 @@ input {
 	<%@ include file="/WEB-INF/views/include/nav.jsp"%>
 	<div id="input">
 		<div id="inputbox">
-			<form method="post">
-				<label>학번 : ${ST.st_num}</label> <label>이름 : ${ST.st_name}</label>
+			<form method="post" name="form" id="score"  onsubmit="return check()">
+				<label>학번 : ${ST.st_num}</label> 
+				<label>이름 : ${ST.st_name}</label>
 				<div>
-					<label>과목<input name="sub"></label> <label>점수<input
-						name="score"></label>
+					<label>과목<input name="sub" maxlength="2"></label> 
+					<label>점수<input
+						name="score" maxlength="3"></label>
 				</div>
 		</div>
 		<div id="button">
@@ -56,4 +58,22 @@ input {
 		</form>
 	</div>
 </body>
+<script>
+function check(){
+	
+	if(form.sub.value == ""){
+		alert("과목을 입력하세요!!");
+		form.sub.focus;
+		return false;
+	} 
+	if (form.score.value == ""){
+		alert("점수를 입력하세요!!")
+		form.score.focus;
+		return false;
+	}
+		return true;
+
+}
+	
+</script>
 </html>
