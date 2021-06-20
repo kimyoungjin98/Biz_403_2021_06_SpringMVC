@@ -12,23 +12,26 @@ import com.callor.score.model.ScoreVO;
 import com.callor.score.model.StudentVO;
 import com.callor.score.persistance.ScoreDao;
 import com.callor.score.persistance.StudentDao;
+import com.callor.score.service.ScoreService;
+import com.callor.score.service.StudentService;
 
 @Controller
 public class InfoController {
 	
-	protected final StudentDao stDao;
-	protected final ScoreDao scDao;
+	protected final StudentService stService;
+	protected final ScoreService scService;
 
-	public InfoController(StudentDao stDao, ScoreDao scDao) {
-		this.stDao = stDao;
-		this.scDao = scDao;
+	public InfoController(ScoreService scService,StudentService stService) {
+		this.scService = scService;
+		this.stService = stService;
+		
 	}
 	
 	@RequestMapping(value="/info", method=RequestMethod.GET)
 	public String info(@RequestParam("num") String num, Model model) {
 		
-		StudentVO stVO = stDao.findById(num);
-		List<ScoreVO> scList = scDao.findByNum(num);
+		StudentVO stVO = stService.findById(num);
+		List<ScoreVO> scList = scService.findByNum(num);
 		
 		model.addAttribute("SCLIST", scList);
 		model.addAttribute("ST", stVO);

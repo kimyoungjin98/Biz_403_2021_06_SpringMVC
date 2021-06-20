@@ -17,36 +17,34 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Repository("scoreDao")
 @Service
-public class ScoreDaoImplV1 implements ScoreDao{
-	
+public class ScoreDaoImplV1 implements ScoreDao {
+
 	protected final JdbcTemplate jdbcTemplate;
-	
+
 	public ScoreDaoImplV1(JdbcTemplate jdbcTemplate) {
-		
+
 		this.jdbcTemplate = jdbcTemplate;
-		
-		
+
 	}
 
 	@Override
 	public List<ScoreDTO> selectAll() {
 		// TODO Auto-generated method stub
 		String sql = " SELECT * FROM view_성적정보 ";
-		
-		List<ScoreDTO> sList = jdbcTemplate.query(sql, new BeanPropertyRowMapper<ScoreDTO>(ScoreDTO.class));  
-		log.debug(" SELECT {}", sList.toString());
-		
+		sql += " ORDER BY v_num ";
+
+		List<ScoreDTO> sList = jdbcTemplate.query(sql, new BeanPropertyRowMapper<ScoreDTO>(ScoreDTO.class));
+
 		return sList;
 	}
-	
+
 	@Override
 	public List<ScoreVO> select() {
 		// TODO Auto-generated method stub
 		String sql = " SELECT * FROM tbl_score ";
-		
-		List<ScoreVO> scoreList = jdbcTemplate.query(sql, new BeanPropertyRowMapper<ScoreVO>(ScoreVO.class));  
-		log.debug(" SELECT {}", scoreList.toString());
-		
+
+		List<ScoreVO> scoreList = jdbcTemplate.query(sql, new BeanPropertyRowMapper<ScoreVO>(ScoreVO.class));
+
 		return scoreList;
 	}
 
@@ -54,13 +52,17 @@ public class ScoreDaoImplV1 implements ScoreDao{
 	public ScoreVO findById(String num) {
 		// TODO Auto-generated method stub
 		String sql = " SELECT * FROM tbl_score ";
-		sql += " WHERE sc_stnum = ? "; 
-		
+		sql += " WHERE sc_stnum = ? ";
+
 		Object[] params = new Object[] { num };
+
+		List<ScoreVO> scoreList = jdbcTemplate.query(sql, params, new BeanPropertyRowMapper<ScoreVO>(ScoreVO.class));
+		if (scoreList.size() > 0) {
+
+			return scoreList.get(0);
+		}
 		
-		ScoreVO vo = (ScoreVO)jdbcTemplate.query(sql, params , new BeanPropertyRowMapper<ScoreVO>(ScoreVO.class));
-		
-		return vo;
+		return null;
 	}
 
 	@Override
@@ -68,13 +70,9 @@ public class ScoreDaoImplV1 implements ScoreDao{
 		// TODO Auto-generated method stub
 		String sql = " INSERT INTO tbl_score(sc_stnum, sc_subject, sc_score) ";
 		sql += " VALUES(?,?,?) ";
-		
-		Object[] params = new Object[]
-				{
-						vo.getSc_stnum(), vo.getSc_subject(), vo.getSc_score()
-				};
-		
-		
+
+		Object[] params = new Object[] { vo.getSc_stnum(), vo.getSc_subject(), vo.getSc_score() };
+
 		return jdbcTemplate.update(sql, params);
 	}
 
@@ -82,17 +80,9 @@ public class ScoreDaoImplV1 implements ScoreDao{
 	public int update(ScoreVO vo) {
 		// TODO Auto-generated method stub
 		String sql = " UPDATE tbl_score SET";
-		sql += " sc_stnum = ? ";
-		sql += " sc_subject = ? ";
-		sql += " sc_score = ? ";
-		
-		
-		Object[] params = new Object[]
-				{
-						vo.getSc_stnum(), vo.getSc_subject(), vo.getSc_score()
-				};
-		
-		
+
+		Object[] params = new Object[] { vo.getSc_stnum(), vo.getSc_subject(), vo.getSc_score() };
+
 		return jdbcTemplate.update(sql, params);
 	}
 
@@ -101,29 +91,26 @@ public class ScoreDaoImplV1 implements ScoreDao{
 		// TODO Auto-generated method stub
 		String sql = " DELETE FROM tbl_score ";
 		sql += " WHERE sc_seq = ? ";
-		
+
 		Integer sc_seq = Integer.valueOf(pk);
-		
-		Object params = new Object[] {sc_seq };
-		
-		
+
+		Object params = new Object[] { sc_seq };
+
 		return jdbcTemplate.update(sql, sc_seq);
 	}
 
 	@Override
 	public List<ScoreVO> findByNum(String num) {
 		// TODO Auto-generated method stub
-		
+
 		String sql = " SELECT * FROM tbl_score ";
 		sql += " WHERE sc_stnum = ? ";
-		
-		Object[] params = new Object[] {num};
-		
-		List<ScoreVO> scList = jdbcTemplate.query(sql,params,new BeanPropertyRowMapper<ScoreVO>(ScoreVO.class));
+
+		Object[] params = new Object[] { num };
+
+		List<ScoreVO> scList = jdbcTemplate.query(sql, params, new BeanPropertyRowMapper<ScoreVO>(ScoreVO.class));
 
 		return scList;
 	}
-
-	
 
 }

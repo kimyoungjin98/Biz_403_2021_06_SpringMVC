@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.callor.score.model.ScoreDTO;
 import com.callor.score.persistance.ScoreDao;
+import com.callor.score.service.listService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -19,17 +20,16 @@ import lombok.extern.slf4j.Slf4j;
 public class HomeController {
 
 	
-	protected final ScoreDao scoreDao;
+	protected final listService list;
 	
-	public HomeController(ScoreDao scoreDao) {
-		this.scoreDao = scoreDao;
+	public HomeController(listService list) {
+		this.list = list;
 	}
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 
-		List<ScoreDTO> sList = scoreDao.selectAll();
-		log.debug("리스트 {}" + sList.toString());
+		List<ScoreDTO> sList = list.selectDTO();
 		model.addAttribute("sList" , sList);
 		
 		return "home";

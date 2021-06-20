@@ -15,14 +15,14 @@ div#input {
 	display: flex;
 	border-top: 1px solid rgba(0, 0, 0, 0.7);
 	border: 1px solid rgba(0, 0, 0, 0.3);
-	width: 40%;
+	width: 400px;
 	padding: 20px;
 	align-items: center;
 	flex-direction: column;
 }
 
 div#inputbox {
-	margin: 20px;
+	margin: 100px;
 }
 
 label {
@@ -36,7 +36,11 @@ input {
 	outline: none;
 	padding: 10px;
 	margin: 10px;
-	font-size:20px;
+	font-size: 20px;
+}
+
+div#btn{
+	margin-left:8px;
 }
 </style>
 <body>
@@ -44,16 +48,16 @@ input {
 	<div id="input">
 		<div id="inputbox">
 			<form method="post">
-				<label>학번 : ${ST.st_num}</label> <label>이름 : ${ST.st_name}</label>
-				<div>
-					<label>과목<input name="sub"></label> <label>점수<input
-						name="score"></label>
+				<label>이름<input name="name">
+				</label> <label>학년<input name="grade"></label> <label>전공<input
+					name="dept"></label> <label>전화번호<input name="tel"></label>
+				<label>주소<input name="addr"></label>
+
+				<div id="btn">
+					<button>전송</button>
 				</div>
+			</form>
 		</div>
-		<div id="button">
-			<button>전송</button>
-		</div>
-		</form>
 	</div>
 </body>
 </html>
