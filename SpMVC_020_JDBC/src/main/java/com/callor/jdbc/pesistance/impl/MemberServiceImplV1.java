@@ -1,5 +1,7 @@
 package com.callor.jdbc.pesistance.impl;
 
+import java.util.List;
+
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -25,13 +27,22 @@ public class MemberServiceImplV1 implements MemberService{
 		
 		Object[] params = new Object[] { username };
 		
-		UserVO userVO = (UserVO)jdbcTemplate.query(sql, params, new BeanPropertyRowMapper<UserVO>(UserVO.class));
+		UserVO userVO = jdbcTemplate.queryForObject(sql, params, new BeanPropertyRowMapper<UserVO>(UserVO.class));
+		
+		System.out.println(userVO.toString());
 		
 		// 로그인 처리
 		// 1. id가 맞는 회원인가
-		if(username.equalsIgnoreCase(userVO.getName()) && password.equals(userVO.getPassword())) {
+//		for(int i = 0 ; i < userVO.size() ; i ++) {
+//			if(username.equalsIgnoreCase(userVO.get(i).getName()) && password.equals(userVO.get(i).getPassword())) {
+//				return userVO.get(0);
+//			}
+//		}
+		
+		if(username.equalsIgnoreCase(userVO.getMb_username()) && password.equals(userVO.getMb_password())) {
 			return userVO;
 		}
+		
 		
 		return null;
 	}

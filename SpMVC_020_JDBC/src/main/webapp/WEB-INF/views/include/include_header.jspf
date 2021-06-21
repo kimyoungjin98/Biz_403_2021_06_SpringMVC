@@ -127,7 +127,7 @@ section#ad_sec article:nth-of-type(n) {
 		</c:if>
 		<c:if test="${not empty USERVO}">
 			<li>로그아웃</li>
-			<li id="mypage">${USERVO.username} 님 반갑습니다</li>
+			<li id="mypage">${USERVO.mb_username} 님 반갑습니다</li>
 		</c:if>
 	</ul>
 </nav>

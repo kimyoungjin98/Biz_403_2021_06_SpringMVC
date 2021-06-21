@@ -43,7 +43,7 @@ public class BookDaoImplV1 implements BookDao{
 				new BeanPropertyRowMapper<BookVO>(BookVO.class)
 				);
 		log.debug(" SELECT {}", books.toString());
-		return null;
+		return books;
 	}
 
 	@Override

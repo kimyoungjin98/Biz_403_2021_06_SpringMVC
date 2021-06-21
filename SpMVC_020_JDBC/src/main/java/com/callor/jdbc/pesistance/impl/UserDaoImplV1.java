@@ -48,7 +48,7 @@ public class UserDaoImplV1 implements UserDao{
 		// JdbcTemplate으로 query를 전송할때
 		// 전달할 값이 몇개 안될때는 Object[] 배열로 만들지 않아도 된다
 		return jdbcTemplate.update(sql,
-				vo.getUsername(),vo.getPassword());
+				vo.getMb_username(),vo.getMb_password());
 	}
 
 	@Override

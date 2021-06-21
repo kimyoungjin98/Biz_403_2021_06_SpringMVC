@@ -41,8 +41,8 @@ public class Main {
 		
 		Random rnd = new Random();
 		UserVO userVO = new UserVO();
-		userVO.setName("홍길동");
-		userVO.setUsername(String.valueOf(rnd.nextInt()).toString());
+		userVO.setMb_name("홍길동");
+		userVO.setMb_username(String.valueOf(rnd.nextInt()).toString());
 		users.add(userVO);
 		
 	}

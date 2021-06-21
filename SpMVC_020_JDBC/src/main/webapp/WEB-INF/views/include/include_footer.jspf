@@ -13,6 +13,11 @@ address {
 	text-align: center;
 }
 </style>
+
 <footer>
 	<address>Copyright &copy; gyu250@naver.com</address>
 </footer>
+
+<div id="modal">
+	<span>X</span>
+</div>

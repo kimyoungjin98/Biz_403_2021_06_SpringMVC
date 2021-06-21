@@ -13,14 +13,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserVO {
 
-	private String username;
-	private String password;
-	private String name;
-	private String nname;
-	private String email;
-	private String tel;
-	private String addr;
+	private String mb_username;
+	private String mb_password;
+	private String mb_name;
+	private String mb_nname;
+	private String mb_email;
+	private String mb_tel;
+	private String mb_addr;
 	
-	private Boolean expire;
+	private Boolean mb_expire;
 	
 }
