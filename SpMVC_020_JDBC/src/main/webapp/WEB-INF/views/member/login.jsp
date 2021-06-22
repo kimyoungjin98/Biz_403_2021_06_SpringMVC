@@ -14,7 +14,7 @@
 		padding:40px;
 		margin:50px auto;
 		
-		background-color: #191919;
+		background-color: rgba(0,0,0,0.4);
 		text-align: center;
 		border-radius: 20px;
 		z-index:500;
@@ -46,8 +46,7 @@
 		
 		color:white;
 		
-		border:2px solid #3498db;
-		border-radius: 25px;
+		border:2px solid background-color: rgba(0,0,0,0.4);;
 		
 		background: none;
 		text-align: center;
@@ -58,7 +57,7 @@
 	
 	form#login_form input:focus {
 		width:250px;
-		border-color:#2ecc71;
+		border-color:rgba(0,0,0,0.5);
 	}
 	
 	
@@ -78,19 +77,18 @@
 				
 		color:white;
 		
-		border:1px solid #2ecc71;
-		border-radius: 25px;
+		border:1px solid rgba(0,0,0,0.5);
 		
 		cursor: pointer;
 	
 	}
 	
 	form#login_form button.btn_join {
-		background-color: #0000aa;
+		background-color: rgba(0,0,0,0.5);
 	}
 	
 	form#login_form button:hover {
-		background-color: #2ecc71;
+		background-color: rgba(0,0,0,0.2);
 	}
 	
 	form#login_form div.msg {

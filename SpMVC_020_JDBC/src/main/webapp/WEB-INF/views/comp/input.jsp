@@ -1,96 +1,73 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="rootPath" value="${pageContext.request.contextPath}" />
+<c:set var = "rootPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
-<%@ include file="/WEB-INF/views/include/include_head.jspf"%>
+<%@ include file="/WEB-INF/views/include/include_head.jspf" %>
 <style>
-form {
-	width: 80%;
-	margin: 80px auto;
-}
-
-form div {
-	width: 40%;
-	margin: 20px;
-}
-
-form label {
-	display: inline-block;
-	margin: 5px;
-	text-align: start;
-	width: 30%;
-	padding: 8px;
-	color: rgba(0, 0, 0, 0.6);
-}
-
-form input {
-	outline: none;
-	border: 1px solid rgba(0, 0, 0, 0.2);
-	margin: 8px 5px;
-	padding: 7px;
-	width: 60%;
-}
-
-div.input {
-	border: 1px solid rgba(0, 0, 0, 0.2);
-	border-top: 2px solid rgba(0, 0, 0, 0.8);
-}
-
-form button {
-	padding: 10px 50px;
-	outline: 0;
-	border: 0;
-	background-color: rgba(0, 0, 0, 0.2);
-	display: inline-block;
-	color: white;
-}
+   form#book_input input.search {
+      width: 30%;
+   }
+   form#book_input input span.name {
+      color:blue;
+      font-weight: bold;
+      margin-left: 10px;   
+   }
+   
 </style>
-<body>
-	<%@ include file="/WEB-INF/views/include/include_header.jspf"%>
-	<section class="main_sec">
-		<form method="post">
-
-			<div class="input">
-				<div>
-					<label>출판사명</label><input name="cp_title">
-				</div>
-				<div>
-					<label>대표자명</label><input name="cp_ceo">
-				</div>
-				<div>
-					<label>전화번호</label><input name="cp_tel">
-				</div>
-				<div>
-					<label>주소</label><input name="cp_addr">
-				</div>
-				<div class="btn_box">
-					<button type="button" class="btn_save">저장</button>
-					<button type="reset" class="btn_reset">다시작성</button>
-					<button type="button" class="btn_list">리스트로</button>
-				</div>
-			</div>
-		</form>
-	</section>
-	<%@ include file="/WEB-INF/views/include/include_footer.jspf"%>
-</body>
 <script>
-	// const : 상수를 선언하는 키워드
-	//		코드가 진행되는 동안 값이 변경되면 안되는 것
-	const doc = document;
-	doc
-	.querySelector("button.btn_delete")
-	.addEventListener("click", (e)=>{
-		doc.querySelector("input[name='cpcode']")
-		
-		let cpcodeObj = doc.querySelector("input#cpcode")
-		let cpcode = cpcodeObj.value
-		
-		alert("삭제버튼 클릭" + cpcode)
-		if(confirm(cpcode + " 를 삭제합니다!")){
-			location.replace("${rootPath}/comp/delete?cp_code=" + cpcode);
-		}
-	})
-	</script>
+   var rootPath = "${rootPath}"
+</script>
+<script src="${rootPath}/static/js/book_input.js?ver=2021-06-22-007"></script>
+<body>
+   <%@ include file="/WEB-INF/views/include/include_header.jspf" %>
+   <section class="main_sec">
+   <form id="book_input" method="POST">
+      <fieldset>
+      <legend>도서정보 등록</legend>
+      <div>
+         <label>ISBN</label>
+         <input name="bk_isbn" id="bk_isbn" placeholder=""/>
+      </div>
+            <div>
+         <label>도서명</label>
+         <input name="bk_title" id="bk_title" placeholder=""/>
+      </div>
+            <div>
+         <label>출판사</label>
+         <input class="search" name="bk_ccode" id="bk_ccode" placeholder=""/>
+         <span id="cp_title" class="name">출판사명</span>
+      </div>
+            <div>
+         <label>저자</label>
+         <input class="search"  name="bk_acode" id="bk_acode" placeholder=""/>
+         <span id="au_name" class="name">저자명</span>
+      </div>
+            <div>
+         <label>출판연도</label>
+         <input name="bk_date" id="bk_date" placeholder=""/>
+      </div>
+            <div>
+         <label>가격</label>
+         <input name="bk_price" id="bk_price" placeholder=""/>
+      </div>
+      <div>
+         <label>페이지수</label>
+         <input name="bk_pages" id="bk_pages" placeholder=""/>
+      </div>
+      </fieldset>
+   <div class="btn_box">
+      <button type="button" class="btn_save book">저장</button>
+      <button type="reset" class="btn_reset book">새로작성</button>
+      <button type="button" class="btn_list book">돌아가기</button>
+      <!-- button type을 button으로하면 전송을 막는다.
+      스크립트로 처리할 수 있게.
+      reset으로하면 input에 적은 내용을 전부 초기화한다. -->
+   </div>
+   </form>
+   </section>
+   <%@ include file="/WEB-INF/views/include/include_footer.jspf" %>
+
+</body>
 </html>

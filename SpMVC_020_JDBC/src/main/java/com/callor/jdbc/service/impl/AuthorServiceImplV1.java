@@ -35,8 +35,23 @@ public class AuthorServiceImplV1 implements AuthorService{
 
 	@Override
 	public List<AuthorVO> findByATel(String au_tel) {
-		// TODO Auto-generated method stub
+		
+		
+		
 		return null;
+	}
+	
+	@Override
+	public List<AuthorVO> findByNameAndTel(String au_text){
+		
+		List<AuthorVO> nameList = auDao.findByAName(au_text);
+		List<AuthorVO> telList = auDao.findByAName(au_text);
+		
+		// nameList에 telList를 통째로 합치기
+		// 두 list의 Generic type이 같을 경우 가능
+		nameList.addAll(telList);
+		
+		return nameList;
 	}
 
 }

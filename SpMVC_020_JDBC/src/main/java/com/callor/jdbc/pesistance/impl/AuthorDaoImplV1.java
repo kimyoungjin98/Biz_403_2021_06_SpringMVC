@@ -44,7 +44,7 @@ public class AuthorDaoImplV1 implements AuthorDao {
 	@Override
 	public AuthorVO findById(String au_code) {
 		String sql = " SELECT * FROM tbl_author ";
-		sql += " WHERE cp_code = ? ";
+		sql += " WHERE au_code = ? ";
 
 		AuthorVO authorVO = (AuthorVO)jdbcTemplate.query(sql, new Object[] {au_code},new BeanPropertyRowMapper<AuthorVO>(AuthorVO.class));
 

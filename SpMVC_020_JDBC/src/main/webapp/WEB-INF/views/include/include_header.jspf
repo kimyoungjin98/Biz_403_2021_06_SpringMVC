@@ -9,7 +9,7 @@ h1.page_title {
 }
 
 nav#main_nav {
-	background-color: blue;
+	background-color: rgba(0,0,0,0.2);
 	color: white;
 }
 

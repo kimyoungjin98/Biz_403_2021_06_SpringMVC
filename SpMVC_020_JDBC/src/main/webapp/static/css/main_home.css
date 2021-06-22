@@ -10,7 +10,7 @@ section#main_sec {
 
 section#main_sec article {
 	flex: 1;
-	border: 1px solid green;
+	border: 1px solid lightgray;
 	margin: 6px 3px;
 	padding: 5px;
 }
