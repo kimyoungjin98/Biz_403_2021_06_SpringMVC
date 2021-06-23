@@ -10,6 +10,7 @@ section#main_sec {
 
 section#main_sec article {
 	flex: 1;
+	width:30%;
 	border: 1px solid lightgray;
 	margin: 6px 3px;
 	padding: 5px;
@@ -23,7 +24,7 @@ section#main_sec article ul, section#main_sec article ol {
 section#main_sec article li {
 	margin: 0 20px;
 	padding: 0 7px;
-	max-width: 100%;
+	
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;

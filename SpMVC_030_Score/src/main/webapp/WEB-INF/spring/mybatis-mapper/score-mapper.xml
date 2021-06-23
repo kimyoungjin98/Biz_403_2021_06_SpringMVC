@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.callor.score.dao.ScoreDao">
+  
+  <select id="selectViewAll" resultType="ScoreDTO">
+  	SELECT sc_seq,
+  			sc_stnum,
+  			ST.st_name sc_stname,
+  			sc_sbcode,
+  			SB.sb_name sc_sbname,
+  			sc_score 
+  	 FROM tbl_score SC
+  	 	LEFT JOIN tbl_student ST
+  	 		ON SC.sc_stnum = ST.st_num
+  	 	LEFT JOIN tbl_subject SB
+  	 		ON SC.sc_sbcode = SB.sb_code
+  	 	ORDER BY sc_stnum, sc_sbcode
+  </select>
+  
+  <select id="selectAll" resultType="ScoreVO">
+  	SELECT * FROM tbl_score
+  </select>
+  <select id="findById" resultType="ScoreVO">
+  	SELECT * FROM tbl_score
+  	WHERE sc_seq = #{sc_seq}
+  </select>
+  <insert id="insert" parameterType="ScoreVO">
+  	INSERT INTO tbl_score(
+  							sc_stnum,
+  							st_subject,
+  							st_score
+  							)
+  				VALUES(
+  						#{sc_stnum},
+  						#{sc_subject},
+  						#{sc_score}
+  						);
+  </insert>
+  <delete id="delete">
+   DELETE FROM tbl_student WHERE sc_seq= #{sc_seq}
+  </delete>
+  <update id="update" parameterType="ScoreVO">
+  	UPDATE tbl_student SET	
+	sc_stnum = #{sc_stnum},
+	sc_subject = #{sc_subject},
+	sc_score= #{sc_score}
+	WHERE sc_seq = #{sc_seq} 
+  
+  </update>
+  
+</mapper>

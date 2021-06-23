@@ -17,6 +17,12 @@ body {
 	height: 100vh;
 }
 
+h1.page_title {
+	width: 90%;
+	/* top, right, bottom, left 순서로 margin 적용 */
+	margin: 10px auto 0 auto;
+}
+
 header {
 	background-color: white;
 	color: black;
@@ -30,6 +36,13 @@ header {
 }
 
 table {
+	/*
+	css 2.1 적용 spec
+	table 구성했을때 td에 있는 text(content)의
+	길이가 변동되거나 할때
+	table의 전체 모양이 움찔거리는 현상을 방지하는 속성
+	*/
+	table-layout:fixed;
 	border-collapse: collapse;
 	border-spacing: 0;
 	width: 90%;
@@ -38,23 +51,58 @@ table {
 
 table td {
 	margin-left: 30px;
-	text-align: center;
+	text-align: left;
 	padding-left: 10px;
-	max-width: 0;
+}
+
+/* 
+td의 text가 넘칠경우 ellipsis를 적용하는데 
+단순히 td에 적용하면 이웃하는 다른 td의 글자와 겹치는 현상이 발생
+이것을 방지하기 위하여 속성 설정
+*/
+table td span{
+	position:relative;
+	height:1.2rem;
+	display:inline-block;
+	margin-top: 5px;
+	
+}
+
+table td label.truncate{
+	
+	max-width: 80px;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
+	cursor:inherit;
+	display:inline-block;
+	
 }
 
 /* td에 마우스 hover되면 ellipsis를 해제하여 text를 그대로 보여주기 */
+/*
 table td:hover {
 	overflow: visible;
 	text-overflow: inherit;
+}
+*/
+
+table td:hover label.truncate{
+	position:absolute;
+	max-width:none;
+	background-color: #aaa;
+	overflow:visible;
+	top:-6px;
+	padding:5px 20px 5px 0; 
+	z-index:100;
 }
 
 table th, td {
 	border-top: 1px solid #aaa;
 	padding: 5px 8px;
+	/* text font 크기에 따라 높이를 고정하는 속성 */
+	height:2rem;
+	text-align: left;
 }
 
 table tr:last-child td {
@@ -70,7 +118,7 @@ table tr:nth-child(even) {
 }
 
 table tr:hover {
-	background-color: #eee;
+	background-color: #aaa;
 	cursor: pointer;
 }
 
