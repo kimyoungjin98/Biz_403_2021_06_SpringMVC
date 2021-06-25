@@ -6,7 +6,9 @@
 	<fieldset>
 		<div>
 			<label>학번</label> <input name="st_num" id="st_num"
-				placeholder="학번을 입력하세요" />
+				placeholder="학번을 입력하세요" value=<c:out value="${STD.st_num}" default="0"/>
+				/>
+ 
 		</div>
 		<div>
 			<label>학생이름</label> <input name="st_name" id="st_name"
@@ -32,11 +34,15 @@
 			<button type="button" class="save">저장</button>
 			<button type="reset" class="reset">초기화</button>
 			<button type="button" class="list">리스트로</button>
+			<button type="button" class="student home">처음으로</button>
 		</div>
 	</fieldset>
 </form>
 <script>
-	document.querySelector("button.save").addEventListener("click",(e)=>{
+
+	// 이벤트 핸들러에서 사용할 함수 등록
+	const student_submit = () => {
+		
 		let doc = document
 		
 		let st_num = doc.querySelector("input#st_num")
@@ -66,8 +72,35 @@
 			return false;
 		}	
 		doc.querySelector("form#student_input").submit()
-	})
+		
+	}
 
+	document.querySelector("form#student_input").addEventListener("click",(e)=>{
+		
+		let target = e.target
+		if(target.tagName === "BUTTON"){
+			
+			/*
+			tag에 class를 지정할때 1개만 지정할수 있지만
+			다수의 class를 지정하는 경우도 있다
+			이때는 if(target.className === "className")형식으로
+			class를 검사할 수 없다 
+			이럴때는 includes를 사용하여 포함된 class를 검사해야 한다
+			*/
+			if(target.className.includes("save")){
+				student_input.submit();	
+			} else if(target.className.includes("list")){
+				location.href = "${rootPath}/student"
+			}
+			
+		}
+		
+	})
+	/*
+	document.querySelector("button.save").addEventListener("click",(e)=>{
+		
+	})
+*/
 
 </script>
 

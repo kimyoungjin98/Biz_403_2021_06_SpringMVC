@@ -15,7 +15,19 @@
 	box-sizing: border-box;
 	margin:0;
 	padding:0;
+	font-family: 'Y_Spotlight';
+	
 }
+
+@font-face {
+    font-family: 'Y_Spotlight';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/Y_Spotlight.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
 body {
 	width:100wv;
 	height:100vh;
@@ -25,7 +37,7 @@ body {
 }
 header {
 	
-	background: url("${rootPath}/static/images/header_backgroud.jpg") no-repeat;
+	background: url("${rootPath}/static/images/images(3).jpg") no-repeat;
 	background-size: 100% 50%;
 	background-position: top ;
 	background-attachment: fixed;
@@ -34,6 +46,7 @@ header {
 	text-shadow:1px 1px 1px black;
 	color:white;
 	padding:2rem;
+
 	
 }
 
@@ -119,9 +132,15 @@ div.btn_box button {
 }
 
 button:hover {
-	box-shadow: 2px 2px 2px 2px black;
+	background-color:rgba(0,0,0,0.5);
+	transition:0.5s ease;
 	cursor: pointer;
 } 
+
+button{
+	background-color: white;
+	color:black;
+}
 
 form {
 	width:90%;
@@ -159,20 +178,6 @@ form input:hover {
 	background: #bbb;
 }
 
-form button.save {
-	background-color: blue;
-	color:white;
-}
-
-form button.reset {
-	background-color: olive;
-	color:white;
-}
-
-form button.list {
-	background-color: green;
-	color:white;
-}
 
 
 
@@ -192,8 +197,11 @@ form button.list {
 			<c:when test="${BODY == 'STUDENT_LIST'}">
 				<%@ include file="/WEB-INF/views/student/list.jsp" %>
 			</c:when>
-			<c:when test="${BODY == 'STUDENT_INPUT' }">
+			<c:when test="${BODY == 'STUDENT_INPUT'}">
 				<%@ include file="/WEB-INF/views/student/input.jsp" %>
+			</c:when>
+			<c:when test="${BODY == 'STUDENT_DETAIL'}">
+				<%@ include file="/WEB-INF/views/student/detail.jsp" %>
 			</c:when>
 			<c:otherwise>
 				<%@ include file="/WEB-INF/views/main.jsp"%>
@@ -233,6 +241,24 @@ if(home) {
 	home.addEventListener("click",(e)=>{
 			location.href = "${rootPath}/"
 	})
+	
+}
+
+let table = document.querySelector("table.detail")
+if(table){
+	table.addEventListener("click", (e)=>{
+		
+		let target = e.target
+		let tagName = target.tagName
+		
+		if(tagName === "TD"){
+			let tr = target.closest("TR");
+			let stNum = tr.dataset.stnum;
+			
+			location.href="${rootPath}/student/detail?st_num=" + stNum;
+		}
+		
+	});
 	
 }
 </script>
