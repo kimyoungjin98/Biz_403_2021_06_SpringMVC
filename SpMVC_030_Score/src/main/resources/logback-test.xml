@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<!-- 
+	appender : 
+	log를 표시할때 사용할 화면 format 설정하기  
+	-->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>
+				%logger{10} %n[%20.20level] %m%n
+			</pattern>
+		</encoder>
+	</appender>
+	
+	<logger name="com.callor.score" additivity="false">
+		<appender-ref ref="STDOUT"/>
+		<level level="DEBUG"></level>
+	</logger>
+	
+	<logger name="org.springframework.transaction" additivity="false">
+		<appender-ref ref="STDOUT"/>
+		<level level="TRACE"></level>
+	</logger>
+	
+	<logger name="org.springframework.jdbc" additivity="false">
+		<appender-ref ref="STDOUT"/>
+		<level level="TRACE"></level>
+	</logger>
+	
+	<!-- 특별히 조건이 부여되지 않은 경우에 logger를 표시하기 -->
+	<root additivity="false">
+		<appender-ref ref="STDOUT"/>
+		<level value="INFO"/>
+	</root>
+
+</configuration>

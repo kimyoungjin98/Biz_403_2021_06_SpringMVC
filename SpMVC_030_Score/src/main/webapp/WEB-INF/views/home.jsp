@@ -50,6 +50,41 @@ header {
 	
 }
 
+nav{
+	background-color:gray;
+	color:white;
+	width:100wv;
+}
+
+nav ul{
+	list-style: none;
+	display:flex;
+	margin:0 20px;
+}
+
+nav li {
+	padding:16px 12px;
+	border-bottom:3px solid transparent;
+	transition:1s;
+}
+
+nav li:hover{
+	border-bottom:3px lightgray;
+}
+
+nav li:nth-of-type(2){
+	margin-left:auto;
+}
+
+nav.fixed{
+	position:fixed;
+	top:0;
+	left:0;
+	right:10px;
+	border-bottom-right-radius: 20px;
+
+}
+
 section#main_sec {
 	flex:1;
 	width: 100wv;
@@ -58,6 +93,7 @@ section#main_sec {
 	background: linear-gradient(to bottom, #333, #eee);
 	background-size: 100% 100%;
 	background-attachment: fixed;
+	overflow:auto;
 	
 }
 
@@ -189,6 +225,14 @@ form input:hover {
 		<h1>대한고교 성적처리</h1>
 		<p>대한고교 성적처리 시스템 2021</p>
 	</header>
+	<nav id="main_nav">
+		<ul>
+			<li>HOME</li>
+			<li>로그인</li>
+			<li>로그아웃</li>
+			<li>관리자</li>
+		</ul>
+	</nav>
 	<section id="main_sec">
 		<c:choose>
 			<c:when test="${ BODY == 'SCORE_VIEW' }">
@@ -261,6 +305,33 @@ if(table){
 	});
 	
 }
+
+let main_nav = document.querySelector("nav#main_nav")
+let main_header = document.querySelector("header")
+
+// header box의 높이가 얼마인가
+let main_header_height = main_header.offsetHeight
+
+document.addEventListener("scroll", (e)=>{
+	
+	let doc_bound = document.querySelector("HTML").getBoundingClientRect();
+	
+	let doc_top = doc_bound.top;
+	
+	if(doc_top < main_header_height * -1){
+		
+		main_nav.classList.add("fixed")
+		
+	} else {
+		
+		main_nav.classList.remove("fixed")
+		
+	}
+	
+	
+});
+
+
 </script>
 
 </html>
