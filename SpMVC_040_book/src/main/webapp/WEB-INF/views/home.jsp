@@ -14,7 +14,15 @@
 	box-sizing: border-box;
 }
 
+body {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+}
+
 section.content_box {
+	flex: 1;
+	overflow: auto;
 	border: 1px solid #2DB400;
 	padding: 12px 16px;
 	display: flex;
@@ -25,15 +33,15 @@ section.content_box div.content {
 	display: flex;
 	border: 1px solid #2DB400;
 	margin: 5px auto;
-	width:30%;
-	height:30vh;
-	overflow:auto;
+	width: 30%;
+	height: 30vh;
+	overflow: auto;
 }
 
 section.content_box div.content img {
 	flex: 1;
-	width:30%;
-	height:80%;
+	width: 30%;
+	height: 80%;
 }
 
 section.content_box div.content div {
@@ -42,7 +50,7 @@ section.content_box div.content div {
 
 p b {
 	font-weight: bold;
-	color:blue;
+	color: blue;
 }
 
 nav#main_nav {
@@ -54,26 +62,32 @@ nav#main_nav {
 
 nav#main_nav form {
 	margin: 0.6rem;
-	width:50%;
+	width: 50%;
 }
 
-nav#main_nav input{
-	padding:8px;
-	border:0;
-	outline:0;
-	width:100%;
+nav#main_nav input {
+	padding: 8px;
+	border: 0;
+	outline: 0;
+	width: 100%;
 }
 
-@media(min-width:1000px) {
-	section.content_box div.content{
-		width:20%;
-		margin:5px;
+nav#main_nav select {
+	outline: none;
+	padding: 8px;
+	margin-left: auto;
+}
+
+@media ( min-width :1000px) {
+	section.content_box div.content {
+		width: 20%;
+		margin: 5px;
 	}
 }
 
-@media(max-width:700px) {
-	section.content_box div.content{
-		width:95%;
+@media ( max-width :700px) {
+	section.content_box div.content {
+		width: 95%;
 	}
 }
 
@@ -88,56 +102,42 @@ a:hover {
 </head>
 <body>
 	<nav id="main_nav">
+	<c:if test="${CAT == 'BOOK'}">
+		<c:set var="pHolder" value="도서 검색어"/>
+	</c:if>
+	<c:if test="${CAT == 'MOVIE'}">
+		<c:set var="pHolder" value="영화 검색어"/>
+	</c:if>
+	<c:if test="${CAT == 'NEWS'}">
+		<c:set var="pHolder" value="뉴스 검색어"/>
+	</c:if>
+		<select name="category">
+			<option value="BOOK"
+				<c:if test="${CAT == 'BOOK'}">selected=selected</c:if>>도서검색</option>
+			<option value="MOVIE"
+				<c:if test="${CAT == 'MOVIE'}">selected=selected</c:if>>영화검색</option>
+			<option value="NEWS"
+				<c:if test="${CAT == 'NEWS'}">selected=selected</c:if>>뉴스검색</option>
+		</select>
 		<form>
-			<input name="search" placeholder="도서명을 입력후 Enter...">
+			<input name="search" placeholder="${pHolder}를 입력후 Enter...">
 		</form>
 	</nav>
 	<section class="content_box">
-		<c:forEach items="${BOOKS}" var="BOOK">
-			<div class="content">
-				<img src="${BOOK.image}">
-				<div>
-					<p class="title">
-						<a href="${BOOK.link}" target="_NEW">${BOOK.title}</a>
-					</p>
-					<p class="desc">${BOOK.description}</p>
-					<p class="author">
-						<strong>저자 : </strong>${BOOK.author}</p>
-					<p class="publisher">
-						<strong>출판사 : </strong>${BOOK.publisher}</p>
-						<button class="insert">내 서재등록</button>
-				</div>
-			</div>
-		</c:forEach>
+		<%@ include file="/WEB-INF/views/book_list.jsp"%>
+		<%@ include file="/WEB-INF/views/movie_list.jsp"%>
+		<%@ include file="/WEB-INF/views/news_list.jsp"%>
 	</section>
 
 	<script>
-document.querySelector("button").addEventListener("click", (e)=>{
+let category = document.querySelector("select[name='category']")
+category.addEventListener("change",(e)=>{
 	
-	let search = document.querySelector("input[name='search']").value
-	let st_name = document.querySelector("input[name='st_name']").value
+	let value = category.value
 	
-	// 서버로 fetch(ajax)로 전송하기
-	// 1. JSON 데이터로 만들기
-	
-	let json = {search : search, st_name};
-	
-	// JSON type의 데이터를 ajax로 전송하기 위한 문자열 화
-	// Serialize 라고 한다
-	let jsonString = JSON.stringify(json);
-	
-	alert(jsonString)
-	
-	fetch("${rootPath}/api",{
-		method:"POST",
-		body : jsonString,
-		headers : {
-			"content-Type" : "application/json"
-		}
-		
-	})
-	
-})	
+	// location.href="${rootPath}/?category=" + value;
+	location.href="${rootPath}/naver/" + value;
+})
 </script>
 </body>
 </html>
