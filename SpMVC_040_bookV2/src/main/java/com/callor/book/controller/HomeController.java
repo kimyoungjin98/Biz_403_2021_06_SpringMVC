@@ -55,7 +55,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public String home1(@RequestParam(name="search", required = false, defaultValue ="") String search, Model model) throws MalformedURLException, IOException, ParseException {
+	public String home1(@RequestParam(name="search", required = false, defaultValue ="") String search, Model model) throws Exception {
 
 		if(search != null && !search.equals("")) {
 			

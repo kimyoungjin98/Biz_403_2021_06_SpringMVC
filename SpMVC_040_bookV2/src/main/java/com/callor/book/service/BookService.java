@@ -11,6 +11,6 @@ import com.callor.book.model.BookDTO;
 public interface BookService {
 
 	public List<BookDTO> selectAll();
-	public int insert(String isbn) throws UnsupportedEncodingException, IOException, ParseException;
+	public int insert(String isbn) throws Exception;
 	
 }
