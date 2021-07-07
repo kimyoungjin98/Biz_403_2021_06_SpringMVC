@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.callor.gallery.persistance.ext.FileDao">
+
+<select id="select">
+
+
+</select>
+
+<select id="findById">
+
+
+</select>
+
+<!-- 개별적으로 한개씩 데이터 insert -->
+<insert id="insert">
+insert into tbl_files(
+	file_gseq,
+	file_original,
+	file_upname
+)
+values(
+	#{file_gseq},
+	#{file_original},
+	#{file_upname}
+
+)
+</insert>
+
+<insert id="insertOrUpdate">
+insert into tbl_files(
+	file_seq,
+	file_gseq,
+	file_original,
+	file_upname
+)
+values(
+	#{file_seq},
+	#{file_gseq},
+	#{file_original},
+	#{file_upname}
+
+)
+on duplicate key update
+file_gseq = #{file_gseq},
+file_original = #{file_original},
+file_upname = #{file_upname}
+</insert>
+
+<insert id="insertWithList">
+insert into tbl_files(
+	file_gseq,
+	file_original,
+	file_upname
+)
+values
+<foreach collection="filesList" item="file" separator=", ">
+(
+	#{file.file_gseq},
+	#{file.file_original},
+	#{file.file_upname}
+
+)
+</foreach>
+</insert>
+
+<!-- List<DTO>에 담긴 데이터를 한꺼번에 Insert하기 -->
+<insert id="insertOrUpdatetWithList">
+insert into tbl_files(
+	file_gseq,
+	file_original,
+	file_upname
+)
+values
+<foreach collection="filesList" item="file" separator=", ">
+(
+	#{file.file_gseq},
+	#{file.file_original},
+	#{file.file_upname}
+
+)
+as new(f_gseq, f_original, f_upname)
+on duplicate key update
+file_gseq = f_gseq,
+file_original = f_original,
+file_upname = f_upname
+</foreach>
+
+</insert>
+
+<delete id="delete">
+
+
+</delete>
+
+<update id="update">
+
+
+
+</update>
+
+<update id="create_table">
+
+	create table if not exists tbl_files(
+	file_seq	BIGINT	AUTO_INCREMENT	PRIMARY KEY,
+	file_gseq	BIGINT	NOT NULL	,
+	file_original	VARCHAR(256)	NOT NULL	,
+	file_upname	VARCHAR(256)	NOT NULL	
+)
+
+</update>
+
+</mapper>

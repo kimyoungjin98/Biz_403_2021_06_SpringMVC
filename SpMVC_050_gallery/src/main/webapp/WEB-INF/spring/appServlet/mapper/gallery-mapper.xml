@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.callor.gallery.persistance.ext.GalleryDao">
+
+<select id="selectAll" resultType="GalleryDTO">
+SELECT * FROM tbl_gallery
+ORDER BY g_date DESC, g_time DESC
+
+</select>
+
+<select id="findById" resultType="GalleryDTO">
+select * from tbl_gallery
+where g_seq = #{g_seq}
+
+</select>
+
+  <select id="findByIdGalleryFiles" resultType="GalleryFilesDTO">
+      SELECT 
+         G.g_seq AS g_seq, 
+         G.g_writer AS g_writer, 
+          G.g_date AS g_date, G.g_time AS g_time,
+         G.g_subject AS g_subject, 
+          G.g_content AS g_content, 
+          G.g_image AS g_image,
+          
+          F.file_seq AS f_seq, 
+          F.file_original AS f_original, 
+          F.file_upname AS f_upname
+      FROM tbl_gallery G, tbl_files F
+      WHERE G.g_seq = #{g_seq}
+            AND G.g_seq = F.file_gseq
+   </select>    
+
+<!-- 
+insert, update tag에서는 selectKey라는 내부 태그를 사용할 수 있다
+insert, update가 실행되기 전, 후에 다른 SQL 문을 실행하고자 할때
+ -->
+<insert id="insert" parameterType="GalleryDTO">
+insert into tbl_gallery(
+g_seq,
+g_writer,
+g_date,
+g_time,
+g_subject,
+g_content,
+g_image
+
+)
+values (
+#{g_seq},
+#{g_writer},
+#{g_date},
+#{g_time},
+#{g_subject},
+#{g_content},
+#{g_image}
+
+)
+
+<selectKey keyProperty="g_seq" order="AFTER" resultType="Long">
+	SELECT LAST_INSERT_ID()
+</selectKey>
+
+
+</insert>
+
+<delete id="delete">
+
+
+</delete>
+
+<update id="update">
+
+
+
+</update>
+
+<update id="create_table">
+
+create table if not exists tbl_gallery
+(	
+	g_seq	BIGINT	AUTO_INCREMENT	PRIMARY KEY,
+	g_writer	VARCHAR(125)	NOT NULL	,
+	g_date	VARCHAR(10)	NOT NULL	,
+	g_time	VARCHAR(10)	NOT NULL	,
+	g_subject	VARCHAR(50)	NOT NULL	,
+	g_content	VARCHAR(1000)	NOT NULL	,
+	g_image	VARCHAR(125)		
+
+)
+
+
+
+</update>
+
+
+
+
+
+</mapper>

@@ -9,5 +9,31 @@
 		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/tx https://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
+	<!-- dataSource -->
+	<bean id="ds" class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+		<property name="url" value="jdbc:mysql://localhost:3306/myLibs"/>
+		<property name="username" value="gbUser"/>
+		<property name="password" value="1234"/> 
+	</bean>
+	
+	<!-- SqlSessionFactory -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="ds" />
+		<property name="typeAliasesPackage" value="com.callor.gallery.model" />
+		<property name="mapperLocations" value="/WEB-INF/spring/appServlet/mapper/*-mapper.xml" />
+	</bean>
+	
+	<!-- SqlSessionTemplate -->
+	<bean class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory"/>
+	</bean>
+	
+	<tx:annotation-driven/>
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="ds" />
+	</bean>
+
+	<mybatis-spring:scan base-package="com.callor.gallery.persistance.ext"/>
 
 </beans>
