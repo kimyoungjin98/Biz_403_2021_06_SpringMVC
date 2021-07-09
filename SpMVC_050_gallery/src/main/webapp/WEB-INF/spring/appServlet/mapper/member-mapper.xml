@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.callor.gallery.persistance.ext.MemberDao">
+
+<select id="selectAll" resultType="MemberVO">
+ 		SELECT * FROM tbl_member
+ 	</select>
+
+<select id="findById" resultType="MemberVO">
+	select * from tbl_member
+	where m_userid = #{m_userid}
+
+</select>
+
+<!-- 개별적으로 한개씩 데이터 insert -->
+<insert id="insert">
+insert into tbl_files(
+	file_gseq,
+	file_original,
+	file_upname
+)
+values(
+	#{file_gseq},
+	#{file_original},
+	#{file_upname}
+
+)
+</insert>
+
+<insert id="insertOrUpdate">
+insert into tbl_member(
+	m_userid,
+	m_password,
+	m_nick,
+	m_tel,
+	m_level
+)
+values(
+	#{m_userid},
+	#{m_password},
+	#{m_nick},
+	#{m_tel},
+	#{m_level}
+)
+on duplicate key update
+m_userid = #{m_userid},
+m_password = #{m_password},
+m_nick = #{m_nick},
+m_tel = #{m_tel},
+m_level = #{m_level} 
+
+</insert>
+
+<insert id="insertWithList">
+insert into tbl_files(
+	file_gseq,
+	file_original,
+	file_upname
+)
+values
+<foreach collection="filesList" item="file" separator=", ">
+(
+	#{file.file_gseq},
+	#{file.file_original},
+	#{file.file_upname}
+
+)
+</foreach>
+</insert>
+
+<!-- List<DTO>에 담긴 데이터를 한꺼번에 Insert하기 -->
+<insert id="insertOrUpdatetWithList">
+insert into tbl_files(
+	file_gseq,
+	file_original,
+	file_upname
+)
+values
+<foreach collection="filesList" item="file" separator=", ">
+(
+	#{file.file_gseq},
+	#{file.file_original},
+	#{file.file_upname}
+
+)
+as new(f_gseq, f_original, f_upname)
+on duplicate key update
+file_gseq = f_gseq,
+file_original = f_original,
+file_upname = f_upname
+</foreach>
+
+</insert>
+
+<delete id="delete">
+
+
+</delete>
+
+<update id="update">
+
+
+
+</update>
+
+<update id="create_table">
+
+	create table if not exists tbl_member(
+	m_userid VARCHAR(125) PRIMARY KEY,
+	m_password VARCHAR(255) NOT NULL,
+	m_nick VARCHAR(50) NOT NULL,
+	m_tel VARCHAR(50),
+	m_level INT default 9
+		
+)
+
+</update>
+
+</mapper>

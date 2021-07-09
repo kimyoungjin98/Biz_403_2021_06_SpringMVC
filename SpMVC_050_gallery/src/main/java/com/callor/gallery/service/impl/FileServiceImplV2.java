@@ -20,6 +20,11 @@ public class FileServiceImplV2 extends FileServiceImplV1{
 	public String fileUp(MultipartFile file) throws IOException {
 		// TODO Auto-generated method stub
 		
+		String originFileName = file.getOriginalFilename();
+		if(originFileName == null || originFileName.isEmpty()) {
+			return "";
+		}
+		
 		/*
 		 * 파일을 업로드 할때 사용할 path 가져오기
 		 * 
@@ -43,7 +48,7 @@ public class FileServiceImplV2 extends FileServiceImplV1{
 			path.mkdirs();
 		}
 		
-		String originFileName = file.getOriginalFilename();
+		originFileName = file.getOriginalFilename();
 		String strUUID = UUID.randomUUID().toString();
 		strUUID += originFileName;
 		

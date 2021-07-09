@@ -8,6 +8,8 @@ import com.callor.gallery.persistance.GenericDao;
 
 public interface GalleryDao extends GenericDao<GalleryDTO, Long>{
 
-	public List<GalleryFilesDTO> findByIdGalleryFiles(Long g_seq);
+	public List<GalleryFilesDTO> findByGalleryFiles(Long g_seq);
+	
+	public GalleryDTO findByGalleryFilesResultMap(Long g_seq);
 	
 }

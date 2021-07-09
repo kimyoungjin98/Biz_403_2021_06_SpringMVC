@@ -52,7 +52,12 @@
 
 <div class="ga_box">
 	<div>
-		<img src="${rootPath}/files/${GALLERY.g_image}" width="400px">
+		<c:if test="${empty GALLERY.g_image}">
+			<img src="${rootPath}/files/noImage.png" width="200px">
+		</c:if>
+		<c:if test="${not empty GALLERY.g_image}">
+			<img src="${rootPath}/files/${GALLERY.g_image}" width="200px">
+		</c:if>
 	</div>
 	
 	<div class="box_text">

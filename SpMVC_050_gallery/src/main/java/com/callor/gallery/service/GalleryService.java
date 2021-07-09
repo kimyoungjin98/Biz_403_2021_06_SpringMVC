@@ -17,6 +17,10 @@ public interface GalleryService {
 
 	public List<GalleryDTO> selectAll() throws Exception;
 
-	public List<GalleryFilesDTO> findByIdGalleryFiles(Long g_seq);
+	public List<GalleryFilesDTO> findByGalleryFiles(Long g_seq);
+
+	public GalleryDTO findByGallery(Long g_seq);
+
+	public int delete(Long g_seq);
 	
 }
